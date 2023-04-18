@@ -16,7 +16,9 @@ function Input({ addItem }) {
       </label>
       <button
         onClick={() => {
+          if (userInput.trim() === "") return;
           addItem(userInput);
+          setUserInput("");
         }}
       >
         Add to bootcamper list
