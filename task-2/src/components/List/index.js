@@ -1,4 +1,6 @@
-function List({ items }) {
+function List({ items, id }) {
+  console.log("rendering list component")
+  console.log(id);
   return (
     <ol>
       {items.map((item) => (

@@ -5,44 +5,41 @@ import List from "../List";
 import { useReducer } from "react";
 
 const initialState = {
-  names: []
-}
+  names: [],
+};
 
 function namesReducer(state, action) {
-  switch(action.type){
-    case "ADD_NAME": 
-    return {
-      names: [...state.names, action.payload]
-    }
-    default: 
-    throw new Error()
+  switch (action.type) {
+    case "ADD_NAME":
+      return {
+        names: [...state.names, action.payload.newName],
+        id: action.payload.id,
+      };
+    default:
+      throw new Error();
   }
-
-
-  // const updatedNames = [...names, addedName];
-  // setNames(updatedNames);
-
 }
-
-
 
 function App() {
   const [state, dispatch] = useReducer(namesReducer, initialState);
 
   function addName(addedName) {
-
     dispatch({
       type: "ADD_NAME",
-      payload: addedName
-    }
-      )
-      console.log("ADD_NAME")
+      payload: {
+        newName: addedName,
+        id: state.names.length,
+      }
+    });
+    console.log(
+      "addName function has just sent a dispatch containing type and payload"
+    );
   }
 
   return (
     <main>
       <Input addItem={addName} />
-      <List items={state.names} />
+      <List items={state.names} id={state.id}/>
     </main>
   );
 }
