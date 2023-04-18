@@ -12,8 +12,10 @@ function namesReducer(state, action) {
   switch (action.type) {
     case "ADD_NAME":
       return {
-        names: [...state.names, action.payload.newName],
-        id: action.payload.id,
+        names: [...state.names, {
+          name: action.payload.newName,
+          id: action.payload.id,
+        }],
       };
     default:
       throw new Error();
@@ -39,7 +41,7 @@ function App() {
   return (
     <main>
       <Input addItem={addName} />
-      <List items={state.names} id={state.id}/>
+      <List items={state.names}/>
     </main>
   );
 }
